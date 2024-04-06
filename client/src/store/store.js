@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import signupReducer from './Signup/signupSlice';
 
-import { signup } from './Signup/actions';
+import { signup, login } from './Signup/actions';
 
 const store = configureStore({
   reducer: {
@@ -10,5 +10,5 @@ const store = configureStore({
   },
 });
 
-export { signup };
+export { signup, login };
 export default store;

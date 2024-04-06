@@ -1,9 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import axios from 'axios';
+import { login } from '../store/store';
+
+import { useDispatch, useSelector } from 'react-redux';
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
+
+  const { isLoading, user, successMessage, errorMessage } = useSelector(
+    (state) => state.auth
+  );
+
+  console.log('🚀 ~ LoginForm ~ isLoading:', isLoading);
+  console.log('🚀 ~ LoginForm ~ user:', user);
+
   const validationSchema = Yup.object({
     email: Yup.string().email('Invalid email address').required('Required'),
     password: Yup.string()
@@ -12,25 +23,14 @@ const LoginForm = () => {
   });
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
-    try {
-      const response = await axios.post('http://localhost:5000/login', values);
-
-      if (response.data) {
-        setLoginMsg(response.data.message);
-      }
-      //Reset the form
-      resetForm();
-
-      //set submitting to false
-      setSubmitting(false);
-    } catch (error) {
-      console.log('Error Loggin in up', error);
-    }
+    dispatch(login(values));
   };
+
   return (
     <div>
       <h1>Log in</h1>
-
+      {isLoading && <>Loading...</>}
+      {user && <>{user.email}</>}
       <Formik
         initialValues={{ email: '', password: '' }}
         validationSchema={validationSchema}
