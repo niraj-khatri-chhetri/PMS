@@ -6,6 +6,8 @@ const initialState = {
   isLoading: false,
   successMessage: null,
   errorMessage: null,
+  token: null,
+  userId: null,
 };
 
 const signupSlice = createSlice({
@@ -36,7 +38,8 @@ const signupSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload.user;
+        state.token = action.payload.token;
+        state.userId = action.payload.userId;
         state.successMessage = action.payload.message;
       })
       .addCase(login.rejected, (state, action) => {

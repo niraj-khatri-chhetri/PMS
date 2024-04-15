@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { signup } from '../store/store';
 
 import Input from './Input/index';
+import Button from './Button';
 
 const SignupForm = () => {
   const dispatch = useDispatch();
@@ -65,14 +66,16 @@ const SignupForm = () => {
             handleChange={handleChange}
             placeholder="Confirm your password"
           />
-          <div className="flex items-center justify-between">
+          {/* <div className="flex items-center justify-between">
             <button
               type="submit"
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Sign Up
             </button>
-          </div>
+          </div> */}
+
+          <Button text="Sign-up" isLoading={isLoading} />
         </form>
       </>
     </div>
