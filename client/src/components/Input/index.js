@@ -9,6 +9,8 @@ const index = ({
   values,
   placeholder,
   onChange,
+  errors = {},
+  isRequired = false,
 }) => {
   if (type === 'email') {
     return (
@@ -18,8 +20,8 @@ const index = ({
           className="block text-gray-700 text-sm font-bold mb-2 text-left"
         >
           {label}
+          {isRequired && <span className="text-red-500 ml-1">*</span>}
         </label>
-
         <input
           id={id}
           type="email"
@@ -28,9 +30,15 @@ const index = ({
           onChange={handleChange}
           value={values?.[`${name}`]}
           placeholder={placeholder}
-          className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none
-"
+          className={`block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none
+          `}
         />
+
+        {errors[`${name}`] && (
+          <p className="text-red-500 text-sm mt-1 text-left">
+            {errors[`${name}`]}
+          </p>
+        )}
       </div>
     );
   }
@@ -43,6 +51,7 @@ const index = ({
           className="block text-gray-700 text-sm font-bold mb-2 text-left"
         >
           {label}
+          {isRequired && <span className="text-red-500 ml-1">*</span>}
         </label>
 
         <input
@@ -53,8 +62,15 @@ const index = ({
           placeholder={placeholder}
           onChange={handleChange}
           value={values?.[`${name}`]}
-          className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+          className={
+            'block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  focus:ring-indigo-500 sm:text-sm sm:leading-6 outline-none'
+          }
         />
+        {errors[`${name}`] && (
+          <p className="text-red-500 text-sm mt-1 text-left">
+            {errors[`${name}`]}
+          </p>
+        )}
       </div>
     );
   }
@@ -67,6 +83,7 @@ const index = ({
           className="block text-gray-700 text-sm font-bold mb-2 text-left"
         >
           {label}
+          {isRequired && <span className="text-red-500 ml-1">*</span>}
         </label>
 
         <input
@@ -77,8 +94,15 @@ const index = ({
           placeholder={placeholder}
           onChange={handleChange}
           value={values?.[`${name}`]}
-          className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none"
+          className={`block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 
+    ring-1 ring-inset ${errors?.[`${name}`] ? 'ring-red-400' : 'ring-gray-300'}
+    placeholder:text-gray-400 focus:ring-2 focus:ring-inset 
+    focus:ring-indigo-500 sm:text-sm sm:leading-6 outline-none`}
         />
+
+        {errors[name] && (
+          <p className="text-red-500 text-sm mt-1 text-left">{errors[name]}</p>
+        )}
       </div>
     );
   }
@@ -90,6 +114,7 @@ const index = ({
           className="block text-gray-700 text-sm font-bold mb-2 text-left"
         >
           {label}
+          {isRequired && <span className="text-red-500 ml-1">*</span>}
         </label>
 
         <input
@@ -100,13 +125,20 @@ const index = ({
           placeholder={placeholder}
           onChange={handleChange}
           value={values?.[`${name}`]}
-          className="block w-full rounded-md border border-gray-300 py-2 px-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className={`block w-full rounded-md border ${
+            !errors?.[`${name}`] ? 'border-gray-300' : 'border-red-400'
+          } py-2 px-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
         />
+        {errors[`${name}`] && (
+          <p className="text-red-500 text-sm mt-1 text-left">
+            {errors[`${name}`]}
+          </p>
+        )}
       </div>
     );
   }
 
-  if (type === 'desc') {
+  if (type === 'textarea') {
     return (
       <div className="mb-4">
         <label
@@ -114,16 +146,28 @@ const index = ({
           className="block text-gray-700 text-sm font-bold mb-2 text-left"
         >
           {label}
+          {isRequired && <span className="text-red-500 ml-1">*</span>}
         </label>
+
         <textarea
-          type="desc"
           id={id}
           name={name}
+          value={values[`name`]}
           rows="5"
           cols="50"
           placeholder={placeholder}
-          className="block w-full rounded-md border border-gray-300 py-2 px-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          onChange={handleChange}
+          // className="block w-full rounded-md border border-gray-300 py-2 px-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className={`block w-full rounded-md border ${
+            !errors?.[`${name}`] ? 'border-gray-300' : 'border-red-400'
+          } py-2 px-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
         ></textarea>
+
+        {errors[`${name}`] && (
+          <p className="text-red-500 text-sm mt-1 text-left">
+            {errors[`${name}`]}
+          </p>
+        )}
       </div>
     );
   }

@@ -1,40 +1,54 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { create } from '../store/store';
 
 import Input from './Input';
 import Button from './Button';
 
 const ProductForm = () => {
-  const {
-    handleSubmit,
-    handleChange,
-    values,
-    setFieldValue,
-    validationSchema,
-    errors,
-  } = useFormik({
+  const dispatch = useDispatch();
+  const { product, loading, error, message } = useSelector(
+    (state) => state.product
+  );
+  const formik = useFormik({
     initialValues: { title: '', price: '', description: '', file: null },
-    onSubmit: (values) => {
-      console.log('🚀 ~ productForm ~ values:', values);
+    onSubmit: (values, { resetForm }) => {
+      dispatch(
+        create({
+          ...values,
+          file: values.file.name,
+        })
+      );
+
+      if (!loading) resetForm();
     },
-    //  validationSchema: Yup.object({
-    //    email: Yup.string().email('Invalid email address').required('Required'),
-    //    password: Yup.string()
-    //      .min(8, 'Password must be at least 8 characters')
-    //      .required('Required'),
-    //  }),
+    validationSchema: Yup.object({
+      title: Yup.string().required().label('Title'),
+      price: Yup.number()
+        .min(1, 'Price cannot be less than 1')
+        .required()
+        .label('Price'),
+
+      description: Yup.string()
+        .required()
+        .min(3, 'Should be at least three characters')
+        .label('Description'),
+      file: Yup.string().required().label('File'),
+    }),
   });
 
+  const { handleSubmit, handleChange, values, setFieldValue, errors } = formik;
+  console.log('🚀 ~ ProductForm ~ errors:', errors);
   const handleFileChange = (event) => {
-    console.log('🚀 ~ handleFileChange ~ event:', event);
     setFieldValue('file', event.currentTarget.files[0]);
   };
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-auto">
       <h1>Add product</h1>
-
       <form onSubmit={handleSubmit}>
         <Input
           id="title"
@@ -44,6 +58,8 @@ const ProductForm = () => {
           values={values}
           handleChange={handleChange}
           placeholder="Enter product title"
+          errors={errors}
+          isRequired={true}
         />
 
         <Input
@@ -54,20 +70,24 @@ const ProductForm = () => {
           values={values}
           handleChange={handleChange}
           placeholder="Enter the price"
+          errors={errors}
+          isRequired={true}
         />
         <Input
           id="description"
           name="description"
-          type="desc"
+          type="textarea"
           label="Description"
           values={values}
           handleChange={handleChange}
           placeholder="Enter the Description"
+          errors={errors}
+          isRequired={true}
         />
 
         {/* <input id='file' type="file" name="file" onChange={handleFileChange} /> */}
         <Input id="file" type="file" name="file" onChange={handleFileChange} />
-        <Button text="Create" />
+        <Button text="Create" loading={loading} />
       </form>
     </div>
   );
