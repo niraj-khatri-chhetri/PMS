@@ -4,14 +4,19 @@ import './App.css';
 import LoginForm from './components/Login';
 import ProductForm from './components/ProductForm';
 
+//context
+import { useInputContext } from './components/Input/InputContext';
+import { InputProvider } from './components/Input/InputContext';
+
 function App() {
   return (
     <div className="App">
       {/* <Form /> */}
       {/* <SignupForm /> */}
       {/* <LoginForm /> */}
-
-      <ProductForm />
+      <InputProvider>
+        <ProductForm />
+      </InputProvider>
     </div>
   );
 }

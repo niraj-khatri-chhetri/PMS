@@ -13,6 +13,7 @@ const ProductForm = () => {
   const { product, loading, error, message } = useSelector(
     (state) => state.product
   );
+
   const formik = useFormik({
     initialValues: { title: '', price: '', description: '', file: null },
     onSubmit: (values, { resetForm }) => {
@@ -41,7 +42,7 @@ const ProductForm = () => {
   });
 
   const { handleSubmit, handleChange, values, setFieldValue, errors } = formik;
-  console.log('🚀 ~ ProductForm ~ errors:', errors);
+
   const handleFileChange = (event) => {
     setFieldValue('file', event.currentTarget.files[0]);
   };
@@ -94,3 +95,5 @@ const ProductForm = () => {
 };
 
 export default ProductForm;
+
+// #################

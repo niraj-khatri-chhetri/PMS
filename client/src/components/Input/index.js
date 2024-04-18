@@ -1,4 +1,61 @@
 import React from 'react';
+import styled from 'styled-components';
+
+import { basic } from '../Styles/theme';
+
+const BaseInput = styled.div`
+  margin-bottom: 1rem;
+`;
+
+const StyledLabel = styled.div`
+  display: block;
+  width: 100%;
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+  font-size: 0.875rem /* 14px */;
+  line-height: 1.25rem /* 20px */;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-align: left;
+`;
+
+const shared = `
+  width: 100%;
+  border-radius: 0.375rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  font-size: 16px;
+  border: 1.4px solid #d1d5db;
+  transition: all 0.1s ease;
+  color: #333; 
+  ::placeholder {
+    color: #666;
+  }
+  outline: none;
+
+  &:focus {
+    border: 1px solid ${basic.primary.default}; /* focus:border-indigo-500 equivalent */
+    box-shadow: 0 0 0 1px ${basic.primary.default};; /* focus:ring-1 and focus:ring-indigo-500 equivalent */
+  }
+
+  &.error {
+    border-color: #ef4444; /* border-red-400 equivalent */
+  }
+
+  &.sm {
+    font-size: 0.875rem; /* sm:text-sm equivalent */
+  }
+`;
+
+const StyledInput = styled.input`
+  ${shared}
+`;
+
+const StyledArea = styled.textarea`
+  ${shared}
+`;
 
 const index = ({
   id,
@@ -12,81 +69,81 @@ const index = ({
   errors = {},
   isRequired = false,
 }) => {
-  if (type === 'email') {
-    return (
-      <div className="mb-4">
-        <label
-          htmlFor={name}
-          className="block text-gray-700 text-sm font-bold mb-2 text-left"
-        >
-          {label}
-          {isRequired && <span className="text-red-500 ml-1">*</span>}
-        </label>
-        <input
-          id={id}
-          type="email"
-          name={name}
-          autoComplete="off"
-          onChange={handleChange}
-          value={values?.[`${name}`]}
-          placeholder={placeholder}
-          className={`block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none
-          `}
-        />
+  // if (type === 'email') {
+  //   return (
+  //     <div className="mb-4">
+  //       <label
+  //         htmlFor={name}
+  //         className="block text-gray-700 text-sm font-bold mb-2 text-left"
+  //       >
+  //         {label}
+  //         {isRequired && <span className="text-red-500 ml-1">*</span>}
+  //       </label>
+  //       <input
+  //         id={id}
+  //         type="email"
+  //         name={name}
+  //         autoComplete="off"
+  //         onChange={handleChange}
+  //         value={values?.[`${name}`]}
+  //         placeholder={placeholder}
+  //         className={`block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none
+  //         `}
+  //       />
 
-        {errors[`${name}`] && (
-          <p className="text-red-500 text-sm mt-1 text-left">
-            {errors[`${name}`]}
-          </p>
-        )}
-      </div>
-    );
-  }
+  //       {errors[`${name}`] && (
+  //         <p className="text-red-500 text-sm mt-1 text-left">
+  //           {errors[`${name}`]}
+  //         </p>
+  //       )}
+  //     </div>
+  //   );
+  // }
 
-  if (type === 'password') {
-    return (
-      <div className="mb-4">
-        <label
-          htmlFor={name}
-          className="block text-gray-700 text-sm font-bold mb-2 text-left"
-        >
-          {label}
-          {isRequired && <span className="text-red-500 ml-1">*</span>}
-        </label>
+  // if (type === 'password') {
+  //   return (
+  //     <div className="mb-4">
+  //       <label
+  //         htmlFor={name}
+  //         className="block text-gray-700 text-sm font-bold mb-2 text-left"
+  //       >
+  //         {label}
+  //         {isRequired && <span className="text-red-500 ml-1">*</span>}
+  //       </label>
 
-        <input
-          id={id}
-          type="password"
-          name={name}
-          autoComplete="off"
-          placeholder={placeholder}
-          onChange={handleChange}
-          value={values?.[`${name}`]}
-          className={
-            'block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  focus:ring-indigo-500 sm:text-sm sm:leading-6 outline-none'
-          }
-        />
-        {errors[`${name}`] && (
-          <p className="text-red-500 text-sm mt-1 text-left">
-            {errors[`${name}`]}
-          </p>
-        )}
-      </div>
-    );
-  }
+  //       <input
+  //         id={id}
+  //         type="password"
+  //         name={name}
+  //         autoComplete="off"
+  //         placeholder={placeholder}
+  //         onChange={handleChange}
+  //         value={values?.[`${name}`]}
+  //         className={
+  //           'block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  focus:ring-indigo-500 sm:text-sm sm:leading-6 outline-none'
+  //         }
+  //       />
+  //       {errors[`${name}`] && (
+  //         <p className="text-red-500 text-sm mt-1 text-left">
+  //           {errors[`${name}`]}
+  //         </p>
+  //       )}
+  //     </div>
+  //   );
+  // }
 
   if (type === 'text') {
     return (
-      <div className="mb-4">
-        <label
+      <BaseInput>
+        <StyledLabel
           htmlFor={name}
-          className="block text-gray-700 text-sm font-bold mb-2 text-left"
+          // className="block text-gray-700 text-sm font-bold mb-2 text-left"
         >
           {label}
           {isRequired && <span className="text-red-500 ml-1">*</span>}
-        </label>
+        </StyledLabel>
 
-        <input
+        <StyledInput
           id={id}
           type="text"
           name={name}
@@ -94,30 +151,26 @@ const index = ({
           placeholder={placeholder}
           onChange={handleChange}
           value={values?.[`${name}`]}
-          className={`block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 
-    ring-1 ring-inset ${errors?.[`${name}`] ? 'ring-red-400' : 'ring-gray-300'}
-    placeholder:text-gray-400 focus:ring-2 focus:ring-inset 
-    focus:ring-indigo-500 sm:text-sm sm:leading-6 outline-none`}
         />
 
         {errors[name] && (
           <p className="text-red-500 text-sm mt-1 text-left">{errors[name]}</p>
         )}
-      </div>
+      </BaseInput>
     );
   }
   if (type === 'number') {
     return (
       <div className="mb-4">
-        <label
+        <StyledLabel
           htmlFor={name}
-          className="block text-gray-700 text-sm font-bold mb-2 text-left"
+          // className="block text-gray-700 text-sm font-bold mb-2 text-left"
         >
           {label}
           {isRequired && <span className="text-red-500 ml-1">*</span>}
-        </label>
+        </StyledLabel>
 
-        <input
+        <StyledInput
           id={id}
           type="number"
           name={name}
@@ -125,9 +178,9 @@ const index = ({
           placeholder={placeholder}
           onChange={handleChange}
           value={values?.[`${name}`]}
-          className={`block w-full rounded-md border ${
-            !errors?.[`${name}`] ? 'border-gray-300' : 'border-red-400'
-          } py-2 px-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+          // className={`block w-full rounded-md border ${
+          //   errors?.[`${name}`] ? 'border-red-400' : 'border-gray-300'
+          // } py-2 px-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
         />
         {errors[`${name}`] && (
           <p className="text-red-500 text-sm mt-1 text-left">
@@ -149,7 +202,7 @@ const index = ({
           {isRequired && <span className="text-red-500 ml-1">*</span>}
         </label>
 
-        <textarea
+        <StyledArea
           id={id}
           name={name}
           value={values[`name`]}
@@ -157,11 +210,7 @@ const index = ({
           cols="50"
           placeholder={placeholder}
           onChange={handleChange}
-          // className="block w-full rounded-md border border-gray-300 py-2 px-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          className={`block w-full rounded-md border ${
-            !errors?.[`${name}`] ? 'border-gray-300' : 'border-red-400'
-          } py-2 px-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
-        ></textarea>
+        ></StyledArea>
 
         {errors[`${name}`] && (
           <p className="text-red-500 text-sm mt-1 text-left">
