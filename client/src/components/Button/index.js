@@ -18,15 +18,11 @@ const StyledButton = styled.button`
   // }
 `;
 
-const index = ({ text, isLoading }) => {
+const index = ({ text, loading }) => {
+  console.log('🚀 ~ index ~ loading:', loading);
   return (
     <div className="flex items-center justify-between">
-      <StyledButton
-        type="submit"
-        // className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-      >
-        {isLoading ? 'Loading...' : text}
-      </StyledButton>
+      <StyledButton type="submit">{loading ? 'Loading...' : text}</StyledButton>
     </div>
   );
 };
