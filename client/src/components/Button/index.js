@@ -4,7 +4,7 @@ import { basic } from '../Styles/theme';
 
 const StyledButton = styled.button`
   background: ${basic.primary.default};
-  color: ${basic.primary.text};
+  color: #fff;
   font-weight: bold;
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
@@ -12,19 +12,19 @@ const StyledButton = styled.button`
   outline: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  letter-spacing: 0.8px;
 
-  // &:hover {
-  //   background-color: #2563eb; /* Blue-700 */
-  // }
+  &:hover {
+    opacity: 0.9;
+  }
 `;
 
-const index = ({ text, loading }) => {
-  console.log('🚀 ~ index ~ loading:', loading);
+const Index = ({ text, loading, className }) => {
   return (
-    <div className="flex items-center justify-between">
-      <StyledButton type="submit">{loading ? 'Loading...' : text}</StyledButton>
-    </div>
+    <StyledButton className={className} type="submit">
+      {loading ? 'Loading...' : text}
+    </StyledButton>
   );
 };
 
-export default index;
+export default Index;

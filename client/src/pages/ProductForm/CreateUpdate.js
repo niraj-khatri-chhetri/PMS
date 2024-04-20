@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Input from './Input';
-import Button from './Button';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
 
-import { useInputContext } from './Input/InputContext';
+import { useInputContext } from './InputContext';
 
-const ProductForm = () => {
+const CreateUpdate = () => {
   const { handleSubmit, setFieldValue, productState } = useInputContext();
   const { product, loading, error, message } = productState;
 
@@ -50,4 +50,4 @@ const ProductForm = () => {
   );
 };
 
-export default ProductForm;
+export default CreateUpdate;

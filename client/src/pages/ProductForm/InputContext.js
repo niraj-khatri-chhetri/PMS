@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { create } from '../../store/Product/actions';
+import { create } from '../../store/store';
 
 const InputContext = createContext();
 
