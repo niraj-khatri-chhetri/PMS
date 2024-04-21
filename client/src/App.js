@@ -9,33 +9,19 @@ import {
   BrowserRouter,
 } from 'react-router-dom';
 
-import { Grid } from './components/Styles/Index';
-import { basic, color } from './components/Styles/theme';
-import styled from 'styled-components';
-
-//context
-// import { useInputContext } from './components/Input/InputContext';
-// import { InputProvider } from './components/Input/InputContext';
-
 import ProductForm from './pages/ProductForm';
-
-const Div = styled.div`
-  border: 1px solid green;
-`;
+import Products from './pages/Products';
 
 function App() {
   return (
     <BrowserRouter className="App">
       <Navbar />
-
       <Routes>
         <Route path="/add-product" element={<ProductForm />} />
+        <Route path="/products" element={<Products />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/signup" element={<SignupForm />} />
       </Routes>
-      {/* <Form /> */}
-      {/* <SignupForm /> */}
-      {/* <LoginForm /> */}
     </BrowserRouter>
   );
 }

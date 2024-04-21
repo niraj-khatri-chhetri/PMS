@@ -1,3 +1,3 @@
-import Grid from './Layout/Grid/Grid';
+import { Grid, GridItem } from './Layout/Grid/Grid';
 
-export { Grid };
+export { Grid, GridItem };
