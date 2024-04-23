@@ -1,6 +1,6 @@
 import './App.css';
 import SignupForm from './components/Signup';
-import LoginForm from './components/Login';
+import LoginForm from './pages/Login';
 import Navbar from './components/Navbar/Index';
 import {
   BrowserRouter as Router,

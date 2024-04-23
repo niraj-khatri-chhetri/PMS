@@ -1,27 +1,46 @@
-import React from 'react';
-import { Grid, GridItem } from '../../components/Styles/Layout/Grid/Grid';
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import ProductCard from '../../components/Cards';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from '../../store/store';
+
+const ProductWrapper = styled.div`
+  max-width: 80%;
+  margin: auto;
+  margin-top: 1rem;
+  padding: 1rem;
+`;
+
+const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin: auto;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+`;
 
 const Index = () => {
-  const gridProps = {
-    width: 'w-4/5',
-    gap: 'gap-4',
-    margin: {
-      auto: 'm-4',
-      top: 'mt-6',
-    },
-  };
+  const dispatch = useDispatch();
+  const product = useSelector((state) => state.product);
+  const { loading, products, error } = product;
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
+
   return (
-    <Grid {...gridProps}>
-      <GridItem color={'bg-orange-500'} span={2}>
-        1
-      </GridItem>
-      <GridItem color={'bg-teal-500'} span={8}>
-        2
-      </GridItem>
-      <GridItem color={'bg-teal-500'} span={2}>
-        3
-      </GridItem>
-    </Grid>
+    <ProductWrapper>
+      <GridContainer className="grid sm:grid-cols-12 gap-6 m-auto">
+        {products.length > 0 &&
+          products.slice(0, 9).map((product, index) => {
+            return (
+              <ProductCard loading={loading} product={product} key={index} />
+            );
+          })}
+      </GridContainer>
+    </ProductWrapper>
   );
 };
 

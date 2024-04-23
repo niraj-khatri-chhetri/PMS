@@ -57,7 +57,6 @@ const NavLink = styled(Link)`
   padding: 0.5rem 1rem;
   border-radius: 0.375rem;
   transition: color 0.3s ease, background-color 0.3s ease;
-
   &:hover {
     color: ${basic.primary.default};
   }
@@ -89,13 +88,13 @@ const Index = () => {
 
         <Menu>
           <MenuItem>
-            <NavLink to="/signup">Signup</NavLink>
-          </MenuItem>
-          <MenuItem>
             <NavLink to="/add-product">Add product</NavLink>
           </MenuItem>
           <MenuItem>
             <NavLink to="/products">Products</NavLink>
+          </MenuItem>
+          <MenuItem>
+            <NavLink to="/login">Login</NavLink>
           </MenuItem>
         </Menu>
 

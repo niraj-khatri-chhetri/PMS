@@ -5,9 +5,9 @@ import { basic } from '../Styles/theme';
 const StyledButton = styled.button`
   background: ${basic.primary.default};
   color: #fff;
-  font-weight: bold;
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
+  font-weight: 400;
+  padding: 0.4rem 0.9rem;
+  border-radius: 0.3rem;
   border: none;
   outline: none;
   cursor: pointer;

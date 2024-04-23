@@ -2,7 +2,7 @@ export const color = {
   green: '#00684a',
   default: {
     backgroundColor: '#fff',
-    textColor: '#333',
+    textColor: '#0d1421',
     borderColor: '#e2e8f0',
   },
 

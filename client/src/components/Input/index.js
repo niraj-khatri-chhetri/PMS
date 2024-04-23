@@ -67,10 +67,14 @@ const Index = ({
   placeholder,
   onChange,
   isRequired = false,
+  values,
+  handleChange,
+  errors,
+  touched,
+  handleBlur,
 }) => {
-  const { handleChange, values, errors, touched, handleBlur } =
-    useInputContext();
-  console.log('🚀 ~ touched:', touched);
+  // const { handleChange, values, errors, touched, handleBlur } =
+  //   useInputContext();
 
   if (type === 'email') {
     return (
