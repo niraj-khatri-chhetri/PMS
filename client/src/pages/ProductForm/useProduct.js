@@ -41,7 +41,6 @@ export const useProduct = (formData) => {
     }),
   });
 
-  console.log('formik values', formik.values);
   return {
     formik,
     productState,

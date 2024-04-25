@@ -11,9 +11,10 @@ const StyledLabel = styled.div`
   display: block;
   width: 100%;
   --tw-text-opacity: 1;
-  color: rgb(55 65 81
-  font-size: 0.875rem 
-  line-height: 1.25rem 
+  //color: rgb(55 65 81);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+
   font-weight: 700;
   margin-bottom: 0.5rem;
   text-align: left;
@@ -29,7 +30,7 @@ const shared = `
   font-size: 16px;
   border: 1.4px solid #d1d5db;
   transition: all 0.1s ease;
-  color: #333; 
+  color: #333;
   ::placeholder {
     color: #666;
   }
@@ -37,7 +38,7 @@ const shared = `
 
   &:focus {
     border: 1px solid ${basic.primary.default}; /* focus:border-indigo-500 equivalent */
-    box-shadow: 0 0 0 1px ${basic.primary.default};; /* focus:ring-1 and focus:ring-indigo-500 equivalent */
+    box-shadow: 0 0 0 1px ${basic.primary.default}; /* focus:ring-1 and focus:ring-indigo-500 equivalent */
   }
 
   &.error {
@@ -69,120 +70,120 @@ const Index = ({
 }) => {
   const { handleChange, values, errors, touched, handleBlur } = formik;
 
-  if (type === 'email') {
-    return (
-      <div className="mb-4">
-        <label
-          htmlFor={name}
-          className="block text-gray-700 text-sm font-bold mb-2 text-left"
-        >
-          {label}
-          {isRequired && <span className="text-red-500 ml-1">*</span>}
-        </label>
-        <input
-          id={id}
-          type="email"
-          name={name}
-          autoComplete="off"
-          onChange={handleChange}
-          value={values?.[`${name}`]}
-          placeholder={placeholder}
-          className={`block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none
-          `}
-        />
+  // if (type === 'email') {
+  //   return (
+  //     <div className="mb-4">
+  //       <label
+  //         htmlFor={name}
+  //         className="block text-gray-700 text-sm font-bold mb-2 text-left"
+  //       >
+  //         {label}
+  //         {isRequired && <span className="text-red-500 ml-1">*</span>}
+  //       </label>
+  //       <input
+  //         id={id}
+  //         type="email"
+  //         name={name}
+  //         autoComplete="off"
+  //         onChange={handleChange}
+  //         value={values?.[`${name}`]}
+  //         placeholder={placeholder}
+  //         className={`block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 outline-none
+  //         `}
+  //       />
 
-        {errors[`${name}`] && (
-          <p className="text-red-500 text-sm mt-1 text-left">
-            {errors[`${name}`]}
-          </p>
-        )}
-      </div>
-    );
-  }
+  //       {errors[`${name}`] && (
+  //         <p className="text-red-500 text-sm mt-1 text-left">
+  //           {errors[`${name}`]}
+  //         </p>
+  //       )}
+  //     </div>
+  //   );
+  // }
 
-  if (type === 'password') {
-    return (
-      <div className="mb-4">
-        <label
-          htmlFor={name}
-          className="block text-gray-700 text-sm font-bold mb-2 text-left"
-        >
-          {label}
-          {isRequired && <span className="text-red-500 ml-1">*</span>}
-        </label>
+  // if (type === 'password') {
+  //   return (
+  //     <div className="mb-4">
+  //       <label
+  //         htmlFor={name}
+  //         className="block text-gray-700 text-sm font-bold mb-2 text-left"
+  //       >
+  //         {label}
+  //         {isRequired && <span className="text-red-500 ml-1">*</span>}
+  //       </label>
 
-        <input
-          id={id}
-          type="password"
-          name={name}
-          autoComplete="off"
-          placeholder={placeholder}
-          onChange={handleChange}
-          value={values?.[`${name}`]}
-          className={
-            'block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  focus:ring-indigo-500 sm:text-sm sm:leading-6 outline-none'
-          }
-        />
-        {errors[`${name}`] && (
-          <p className="text-red-500 text-sm mt-1 text-left">
-            {errors[`${name}`]}
-          </p>
-        )}
-      </div>
-    );
-  }
+  //       <input
+  //         id={id}
+  //         type="password"
+  //         name={name}
+  //         autoComplete="off"
+  //         placeholder={placeholder}
+  //         onChange={handleChange}
+  //         value={values?.[`${name}`]}
+  //         className={
+  //           'block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  focus:ring-indigo-500 sm:text-sm sm:leading-6 outline-none'
+  //         }
+  //       />
+  //       {errors[`${name}`] && (
+  //         <p className="text-red-500 text-sm mt-1 text-left">
+  //           {errors[`${name}`]}
+  //         </p>
+  //       )}
+  //     </div>
+  //   );
+  // }
 
-  if (type === 'text') {
-    return (
-      <BaseInput>
-        <StyledLabel htmlFor={name}>
-          {label}
-          {isRequired && <span className="text-red-500 ml-1">*</span>}
-        </StyledLabel>
+  // if (type === 'text') {
+  //   return (
+  //     <BaseInput>
+  //       <StyledLabel htmlFor={name}>
+  //         {label}
+  //         {isRequired && <span className="text-red-500 ml-1">*</span>}
+  //       </StyledLabel>
 
-        <StyledInput
-          id={id}
-          type="text"
-          name={name}
-          autoComplete="off"
-          placeholder={placeholder}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values?.[`${name}`]}
-        />
+  //       <StyledInput
+  //         id={id}
+  //         type="text"
+  //         name={name}
+  //         autoComplete="off"
+  //         placeholder={placeholder}
+  //         onChange={handleChange}
+  //         onBlur={handleBlur}
+  //         value={values?.[`${name}`]}
+  //       />
 
-        {errors[name] && touched[name] && (
-          <p className="text-red-500 text-sm mt-1 text-left">{errors[name]}</p>
-        )}
-      </BaseInput>
-    );
-  }
-  if (type === 'number') {
-    return (
-      <div className="mb-4">
-        <StyledLabel htmlFor={name}>
-          {label}
-          {isRequired && <span className="text-red-500 ml-1">*</span>}
-        </StyledLabel>
+  //       {errors[name] && touched[name] && (
+  //         <p className="text-red-500 text-sm mt-1 text-left">{errors[name]}</p>
+  //       )}
+  //     </BaseInput>
+  //   );
+  // }
+  // if (type === 'number') {
+  //   return (
+  //     <div className="mb-4">
+  //       <StyledLabel htmlFor={name}>
+  //         {label}
+  //         {isRequired && <span className="text-red-500 ml-1">*</span>}
+  //       </StyledLabel>
 
-        <StyledInput
-          id={id}
-          type="number"
-          name={name}
-          autoComplete="off"
-          placeholder={placeholder}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values?.[`${name}`]}
-        />
-        {errors[`${name}`] && touched[name] && (
-          <p className="text-red-500 text-sm mt-1 text-left">
-            {errors[`${name}`]}
-          </p>
-        )}
-      </div>
-    );
-  }
+  //       <StyledInput
+  //         id={id}
+  //         type="number"
+  //         name={name}
+  //         autoComplete="off"
+  //         placeholder={placeholder}
+  //         onChange={handleChange}
+  //         onBlur={handleBlur}
+  //         value={values?.[`${name}`]}
+  //       />
+  //       {errors[`${name}`] && touched[name] && (
+  //         <p className="text-red-500 text-sm mt-1 text-left">
+  //           {errors[`${name}`]}
+  //         </p>
+  //       )}
+  //     </div>
+  //   );
+  // }
 
   if (type === 'textarea') {
     return (
@@ -198,7 +199,7 @@ const Index = ({
         <StyledArea
           id={id}
           name={name}
-          value={values[`name`]}
+          value={values[`${name}`]}
           rows="5"
           cols="50"
           placeholder={placeholder}
@@ -257,6 +258,30 @@ const Index = ({
       </div>
     );
   }
+
+  return (
+    <BaseInput>
+      <StyledLabel htmlFor={name}>
+        {label}
+        {isRequired && <span className="text-red-500 ml-1">*</span>}
+      </StyledLabel>
+
+      <StyledInput
+        id={id}
+        type={type}
+        name={name}
+        autoComplete="off"
+        placeholder={placeholder}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        value={values?.[`${name}`]}
+      />
+
+      {errors[name] && touched[name] && (
+        <p className="text-red-500 text-sm mt-1 text-left">{errors[name]}</p>
+      )}
+    </BaseInput>
+  );
 };
 
 export default Index;

@@ -27,12 +27,12 @@ const Image = styled.img`
 `;
 
 const Title = styled.h5`
-  font-size: 1.25rem; 
-  font-weight: 600; /
-  line-height: 1.5; /* Equivalent of tracking-tight */
-  color: #1f2937; /* Equivalent of text-gray-900 */
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #1f2937;
   @media (prefers-color-scheme: dark) {
-    color: #fff; /* Equivalent of dark:text-white */
+    color: #fff;
   }
 `;
 

@@ -54,7 +54,7 @@ const CreateUpdate = ({ formData = null }) => {
           onChange={handleFileChange}
           formik={formik}
         />
-        <Button text="Create" loading={loading} />
+        <Button text="Create" type="submit" loading={loading} />
       </form>
     </div>
   );

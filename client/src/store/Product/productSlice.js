@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { create, fetchProducts } from './actions';
+import { create, fetchProducts, fetchProduct } from './actions';
 
 const initialState = {
   loading: false,
@@ -29,7 +29,7 @@ const productSlice = createSlice({
 
     //fetchig products
     builder
-      .addCase(fetchProducts.pending, (state, action) => {
+      .addCase(fetchProducts.pending, (state) => {
         state.loading = true;
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
@@ -37,7 +37,23 @@ const productSlice = createSlice({
         state.products = action.payload.products;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
-        console.log('🚀 ~ .addCase ~ action:', action);
+        state.loading = false;
+        state.error = action.payload.error;
+      });
+
+    //fetching product by an Id
+
+    builder
+      .addCase(fetchProduct.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchProduct.fulfilled, (state, action) => {
+        state.loading = false;
+        state.message = action.payload.message;
+
+        state.product = action.payload.product;
+      })
+      .addCase(fetchProduct.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload.error;
       });

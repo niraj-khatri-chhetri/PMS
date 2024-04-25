@@ -9,18 +9,6 @@ export const create = createAsyncThunk(
     return response.data;
   })
 );
-// export const create = createAsyncThunk(
-//   'product/create',
-//   async (data, { rejectWithValue }) => {
-//     try {
-//       const response = await Api.post('admin/add-product', data);
-
-//       return response.data;
-//     } catch (error) {
-//       return rejectWithValue(error.response.data.message);
-//     }
-//   }
-// );
 
 export const fetchProducts = createAsyncThunk(
   'product/fetchProducts',
@@ -29,15 +17,24 @@ export const fetchProducts = createAsyncThunk(
     return response.data;
   })
 );
-// export const fetchProducts = createAsyncThunk(
-//   'product/fetchProducts',
-//   async (data, { rejectWithValue }) => {
-//     try {
-//       const response = await Api.get('/products');
+
+export const fetchProduct = createAsyncThunk(
+  'product/fetchProduct',
+  async (productId, { rejectWithValue }) => {
+    try {
+      const response = await Api.get(`/products/${productId}`);
+      return response.data;
+    } catch (error) {
+      console.log('🚀 ~ error:', error);
+    }
+  }
+);
+// export const fetchProduct = (productId) =>
+//   createAsyncThunk(
+//     'product/fetchProduct',
+//     errorHandler(async (productId, { rejectWithValue }) => {
+//       const response = await Api.get(`/products/${productId}`);
 //       return response.data;
-//     } catch (error) {
-//       console.log('🚀 ~ error:', error);
-//       return rejectWithValue(error.response.data.message);
-//     }
-//   }
-// );
+//       console.log('🚀 ~ errorHandler ~ response:', response);
+//     })
+//   );
