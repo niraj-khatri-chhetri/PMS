@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import StyledButton from '../Button';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
   width: 100%;
@@ -79,6 +80,10 @@ const Price = styled.span`
 `;
 
 const ProductCard = ({ product }) => {
+  const navigate = useNavigate();
+  const productHandler = () => {
+    navigate(`/product/${product?._id}`);
+  };
   return (
     <Container>
       <a href="#">
@@ -114,8 +119,8 @@ const ProductCard = ({ product }) => {
         </RatingContainer>
         <div className="flex items-center justify-between">
           <Price>रु{product?.price}</Price>
-          <StyledButton text="Buy Now" />
         </div>
+        <StyledButton text="Edit" onClick={productHandler} />
       </div>
     </Container>
   );

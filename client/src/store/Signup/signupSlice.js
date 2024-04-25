@@ -31,7 +31,6 @@ const signupSlice = createSlice({
       });
 
     //login builder
-
     builder
       .addCase(login.pending, (state) => {
         state.isLoading = true;

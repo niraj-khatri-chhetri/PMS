@@ -25,7 +25,7 @@ export const create = createAsyncThunk(
 export const fetchProducts = createAsyncThunk(
   'product/fetchProducts',
   errorHandler(async (data, { rejectWithValue }) => {
-    const response = await Api.get('/product');
+    const response = await Api.get('/products');
     return response.data;
   })
 );

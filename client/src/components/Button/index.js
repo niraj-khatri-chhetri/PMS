@@ -19,9 +19,9 @@ const StyledButton = styled.button`
   }
 `;
 
-const Index = ({ text, loading, className }) => {
+const Index = ({ text, loading, className, onClick }) => {
   return (
-    <StyledButton className={className} type="submit">
+    <StyledButton className={className} type="submit" onClick={onClick}>
       {loading ? 'Loading...' : text}
     </StyledButton>
   );

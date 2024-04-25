@@ -1,17 +1,21 @@
-import React, { createContext, useContext } from 'react';
+import { create } from '../../store/store';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { create } from '../../store/store';
-
-const InputContext = createContext();
-
-export const InputProvider = ({ children }) => {
+export const useProduct = (formData) => {
   const dispatch = useDispatch();
   const productState = useSelector((state) => state.product);
   const formik = useFormik({
-    initialValues: { title: '', price: '', description: '', file: null },
+    enableReinitialize: true,
+    initialValues: formData
+      ? {
+          title: formData?.title,
+          price: formData?.price,
+          description: formData?.description,
+          file: null,
+        }
+      : { title: '', price: '', description: '', file: null },
     onSubmit: (values, { resetForm }) => {
       dispatch(
         create({
@@ -37,32 +41,9 @@ export const InputProvider = ({ children }) => {
     }),
   });
 
-  const {
-    handleSubmit,
-    handleChange,
-    values,
-    setFieldValue,
-    errors,
-    touched,
-    handleBlur,
-  } = formik;
-
-  const contextValue = {
-    handleSubmit,
-    handleChange,
-    values,
-    setFieldValue,
-    errors,
-    touched,
-    handleBlur,
+  console.log('formik values', formik.values);
+  return {
+    formik,
     productState,
   };
-
-  return (
-    <InputContext.Provider value={contextValue}>
-      {children}
-    </InputContext.Provider>
-  );
 };
-
-export const useInputContext = () => useContext(InputContext);

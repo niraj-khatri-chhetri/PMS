@@ -3,11 +3,12 @@ import React from 'react';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import { useInputContext } from './InputContext';
+import { useProduct } from './useProduct';
 
-const CreateUpdate = () => {
-  const { handleSubmit, setFieldValue, productState } = useInputContext();
-  const { product, loading, error, message } = productState;
+const CreateUpdate = ({ formData = null }) => {
+  const { formik, productState } = useProduct(formData);
+  const { handleSubmit, setFieldValue } = formik;
+  const { loading } = productState;
 
   const handleFileChange = (event) => {
     setFieldValue('file', event.currentTarget.files[0]);
@@ -24,6 +25,7 @@ const CreateUpdate = () => {
           label="Title"
           placeholder="Enter product title"
           isRequired={true}
+          formik={formik}
         />
 
         <Input
@@ -33,6 +35,7 @@ const CreateUpdate = () => {
           label="Price"
           placeholder="Enter the price"
           isRequired={true}
+          formik={formik}
         />
         <Input
           id="description"
@@ -41,9 +44,16 @@ const CreateUpdate = () => {
           label="Description"
           placeholder="Enter the Description"
           isRequired={true}
+          formik={formik}
         />
 
-        <Input id="file" type="file" name="file" onChange={handleFileChange} />
+        <Input
+          id="file"
+          type="file"
+          name="file"
+          onChange={handleFileChange}
+          formik={formik}
+        />
         <Button text="Create" loading={loading} />
       </form>
     </div>

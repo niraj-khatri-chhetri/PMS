@@ -13,6 +13,7 @@ const ProductWrapper = styled.div`
 
 const GridContainer = styled.div`
   display: grid;
+  max-width: 100%;
   grid-template-columns: repeat(1, minmax(0, 1fr));
   gap: 1.5rem;
   margin: auto;
@@ -32,7 +33,7 @@ const Index = () => {
 
   return (
     <ProductWrapper>
-      <GridContainer className="grid sm:grid-cols-12 gap-6 m-auto">
+      <GridContainer>
         {products.length > 0 &&
           products.slice(0, 9).map((product, index) => {
             return (

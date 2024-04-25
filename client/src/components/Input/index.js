@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { basic } from '../Styles/theme';
-// import { useInputContext } from './InputContext';
-import { useInputContext } from '../../pages/ProductForm/InputContext';
 
 const BaseInput = styled.div`
   margin-bottom: 1rem;
@@ -13,9 +11,9 @@ const StyledLabel = styled.div`
   display: block;
   width: 100%;
   --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity));
-  font-size: 0.875rem /* 14px */;
-  line-height: 1.25rem /* 20px */;
+  color: rgb(55 65 81
+  font-size: 0.875rem 
+  line-height: 1.25rem 
   font-weight: 700;
   margin-bottom: 0.5rem;
   text-align: left;
@@ -67,14 +65,9 @@ const Index = ({
   placeholder,
   onChange,
   isRequired = false,
-  values,
-  handleChange,
-  errors,
-  touched,
-  handleBlur,
+  formik,
 }) => {
-  // const { handleChange, values, errors, touched, handleBlur } =
-  //   useInputContext();
+  const { handleChange, values, errors, touched, handleBlur } = formik;
 
   if (type === 'email') {
     return (
