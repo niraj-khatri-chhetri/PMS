@@ -13,7 +13,9 @@ const initialState = {
 const signupSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    resetSate: (state) => initialState,
+  },
   extraReducers: (builder) => {
     //signup builder
     builder
@@ -48,4 +50,5 @@ const signupSlice = createSlice({
   },
 });
 
+export const { resetState } = signupSlice.actions;
 export default signupSlice.reducer;

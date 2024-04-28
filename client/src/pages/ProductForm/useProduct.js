@@ -2,10 +2,10 @@ import { create } from '../../store/store';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
+import api from '../../api';
 
 export const useProduct = (formData) => {
   const dispatch = useDispatch();
-  const productState = useSelector((state) => state.product);
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: formData
@@ -16,7 +16,10 @@ export const useProduct = (formData) => {
           file: null,
         }
       : { title: '', price: '', description: '', file: null },
-    onSubmit: (values, { resetForm }) => {
+    onSubmit: async (values, { resetForm }) => {
+      if (formData) {
+        const response = await api.put(`/admin/add-product/${formData?.id}`);
+      }
       dispatch(
         create({
           ...values,
@@ -43,6 +46,6 @@ export const useProduct = (formData) => {
 
   return {
     formik,
-    productState,
+    productState: formData,
   };
 };

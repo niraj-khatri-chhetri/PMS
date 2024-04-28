@@ -12,6 +12,11 @@ const initialState = {
 const productSlice = createSlice({
   name: 'product',
   initialState,
+  reducers: {
+    resetState: () => {
+      return initialState;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(create.pending, (state) => {
@@ -19,7 +24,6 @@ const productSlice = createSlice({
       })
       .addCase(create.fulfilled, (state, action) => {
         state.loading = false;
-        state.product = action.payload.result;
         state.message = action.payload.message;
       })
       .addCase(create.rejected, (state, action) => {
@@ -50,7 +54,6 @@ const productSlice = createSlice({
       .addCase(fetchProduct.fulfilled, (state, action) => {
         state.loading = false;
         state.message = action.payload.message;
-
         state.product = action.payload.product;
       })
       .addCase(fetchProduct.rejected, (state, action) => {
@@ -60,4 +63,5 @@ const productSlice = createSlice({
   },
 });
 
+export const { resetState } = productSlice.actions;
 export default productSlice.reducer;
