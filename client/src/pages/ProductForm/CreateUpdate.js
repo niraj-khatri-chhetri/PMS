@@ -5,10 +5,10 @@ import Button from '../../components/Button';
 
 import { useProduct } from './useProduct';
 
-const CreateUpdate = ({ formData = null }) => {
-  const { formik, productState } = useProduct(formData);
+const CreateUpdate = () => {
+  const { formik, productState } = useProduct();
+  console.log('🚀 ~ CreateUpdate ~ productState:', productState);
   const { handleSubmit, setFieldValue } = formik;
-  const { loading } = productState;
 
   const handleFileChange = (event) => {
     setFieldValue('file', event.currentTarget.files[0]);
@@ -54,11 +54,7 @@ const CreateUpdate = ({ formData = null }) => {
           onChange={handleFileChange}
           formik={formik}
         />
-        <Button
-          text={!formData ? 'Create' : 'Edit'}
-          type="submit"
-          loading={loading}
-        />
+        <Button text={!productState ? 'Edit' : 'Create'} type="submit" />
       </form>
     </div>
   );

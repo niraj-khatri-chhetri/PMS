@@ -1,25 +1,33 @@
-import { create } from '../../store/store';
+import { useEffect } from 'react';
+import { create, fetchProduct, resetState } from '../../store/store';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import api from '../../api';
+import { useParams } from 'react-router-dom';
 
-export const useProduct = (formData) => {
+export const useProduct = () => {
   const dispatch = useDispatch();
+  const { productId } = useParams();
+
+  const { product } = useSelector((state) => state.product);
+
+  useEffect(() => {
+    if (productId) {
+      dispatch(fetchProduct(productId));
+    }
+  }, [productId]);
+
   const formik = useFormik({
     enableReinitialize: true,
-    initialValues: formData
+    initialValues: productId
       ? {
-          title: formData?.title,
-          price: formData?.price,
-          description: formData?.description,
+          title: product?.title,
+          price: product?.price,
+          description: product?.description,
           file: null,
         }
       : { title: '', price: '', description: '', file: null },
     onSubmit: async (values, { resetForm }) => {
-      if (formData) {
-        const response = await api.put(`/admin/add-product/${formData?.id}`);
-      }
       dispatch(
         create({
           ...values,
@@ -46,6 +54,6 @@ export const useProduct = (formData) => {
 
   return {
     formik,
-    productState: formData,
+    productState: product,
   };
 };
