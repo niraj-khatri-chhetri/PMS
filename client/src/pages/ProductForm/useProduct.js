@@ -1,5 +1,10 @@
 import { useEffect } from 'react';
-import { create, fetchProduct, resetState } from '../../store/store';
+import {
+  create,
+  fetchProduct,
+  resetState,
+  updateProduct,
+} from '../../store/store';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,25 +14,33 @@ export const useProduct = () => {
   const dispatch = useDispatch();
   const { productId } = useParams();
 
-  const { product } = useSelector((state) => state.product);
+  const { product, loading } = useSelector((state) => state.product);
 
   useEffect(() => {
-    if (productId) {
-      dispatch(fetchProduct(productId));
+    if (!productId) {
+      dispatch(resetState(product));
+      return;
     }
+    dispatch(fetchProduct(productId));
   }, [productId]);
 
   const formik = useFormik({
     enableReinitialize: true,
-    initialValues: productId
-      ? {
-          title: product?.title,
-          price: product?.price,
-          description: product?.description,
-          file: null,
-        }
-      : { title: '', price: '', description: '', file: null },
+    initialValues:
+      Object.keys(product).length > 0
+        ? {
+            title: product?.title,
+            price: product?.price,
+            description: product?.description,
+            file: '/static',
+          }
+        : { title: '', price: '', description: '', file: null },
+
     onSubmit: async (values, { resetForm }) => {
+      if (Object.keys(product).length > 0) {
+        dispatch(updateProduct({ data: values, productId }));
+        return;
+      }
       dispatch(
         create({
           ...values,
@@ -37,6 +50,7 @@ export const useProduct = () => {
 
       resetForm();
     },
+
     validationSchema: Yup.object({
       title: Yup.string().required().label('Title'),
       price: Yup.number()
@@ -55,5 +69,6 @@ export const useProduct = () => {
   return {
     formik,
     productState: product,
+    loading,
   };
 };

@@ -29,12 +29,11 @@ export const fetchProduct = createAsyncThunk(
     }
   }
 );
-// export const fetchProduct = (productId) =>
-//   createAsyncThunk(
-//     'product/fetchProduct',
-//     errorHandler(async (productId, { rejectWithValue }) => {
-//       const response = await Api.get(`/products/${productId}`);
-//       return response.data;
-//       console.log('🚀 ~ errorHandler ~ response:', response);
-//     })
-//   );
+
+export const updateProduct = createAsyncThunk(
+  'product/updateProduct',
+  errorHandler(async ({ data, productId }, { rejectWithValue }) => {
+    const response = await Api.put(`/admin/add-product/${productId}`, data);
+    return response.data;
+  })
+);

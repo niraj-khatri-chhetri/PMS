@@ -6,8 +6,7 @@ import Button from '../../components/Button';
 import { useProduct } from './useProduct';
 
 const CreateUpdate = () => {
-  const { formik, productState } = useProduct();
-  console.log('🚀 ~ CreateUpdate ~ productState:', productState);
+  const { formik, productState, loading } = useProduct();
   const { handleSubmit, setFieldValue } = formik;
 
   const handleFileChange = (event) => {
@@ -54,7 +53,11 @@ const CreateUpdate = () => {
           onChange={handleFileChange}
           formik={formik}
         />
-        <Button text={!productState ? 'Edit' : 'Create'} type="submit" />
+        <Button
+          text={Object.keys(productState).length !== 0 ? 'Edit' : 'Create'}
+          type="submit"
+          loading={loading}
+        />
       </form>
     </div>
   );

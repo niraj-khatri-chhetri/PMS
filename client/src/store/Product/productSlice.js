@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { create, fetchProducts, fetchProduct } from './actions';
+import { create, fetchProducts, fetchProduct, updateProduct } from './actions';
 
 const initialState = {
   loading: false,
@@ -13,7 +13,7 @@ const productSlice = createSlice({
   name: 'product',
   initialState,
   reducers: {
-    resetState: () => {
+    resetState: (state) => {
       return initialState;
     },
   },
@@ -57,6 +57,20 @@ const productSlice = createSlice({
         state.product = action.payload.product;
       })
       .addCase(fetchProduct.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload.error;
+      });
+
+    //update product
+    builder
+      .addCase(updateProduct.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        state.loading = false;
+        state.message = action.payload.message;
+      })
+      .addCase(updateProduct.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload.error;
       });

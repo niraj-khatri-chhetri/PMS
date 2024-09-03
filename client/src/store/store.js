@@ -4,7 +4,12 @@ import signupReducer from './Signup/signupSlice';
 import productReducer, { resetState } from './Product/productSlice';
 
 import { signup, login } from './Signup/actions';
-import { create, fetchProducts, fetchProduct } from './Product/actions';
+import {
+  create,
+  fetchProducts,
+  fetchProduct,
+  updateProduct,
+} from './Product/actions';
 
 const store = configureStore({
   reducer: {
@@ -13,5 +18,13 @@ const store = configureStore({
   },
 });
 
-export { signup, login, create, fetchProducts, fetchProduct, resetState };
+export {
+  signup, 
+  login,
+  create,
+  fetchProducts,
+  fetchProduct,
+  resetState,
+  updateProduct,
+};
 export default store;
